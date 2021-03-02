@@ -4,11 +4,16 @@ import android.content.Context
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.Log
 import com.example.myapplication.ui.main.MainFragment
+import java.util.concurrent.ThreadLocalRandom
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), LifecycleLogging {
+
+    override val rId: Int = ThreadLocalRandom.current().nextInt(0, 100)
+
+    init {
+        log("Primary constructor")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +54,7 @@ class MainActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
 
-        log("onStop")
+        log("onStop; isChangingConfigurations: $isChangingConfigurations")
     }
 
     override fun onDestroy() {
@@ -80,10 +85,6 @@ class MainActivity : AppCompatActivity() {
         super.attachBaseContext(newBase)
 
         log("attachBaseContext")
-    }
-
-    private fun log(message: String) {
-        Log.d(TAG, message)
     }
 
     companion object {
