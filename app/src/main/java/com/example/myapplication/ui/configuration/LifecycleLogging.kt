@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.ui.configuration
 
 import android.app.Activity
 import android.util.Log
