@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.main
+package com.kiryanov.androidcomponents.ui.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.myapplication.databinding.FragmentMainBinding
-import com.example.myapplication.ui.common.BindingFragment
-import com.example.myapplication.ui.configuration.ConfigurationActivity
+import com.kiryanov.androidcomponents.databinding.FragmentMainBinding
+import com.kiryanov.androidcomponents.ui.common.BindingFragment
+import com.kiryanov.androidcomponents.ui.configuration.ConfigurationActivity
 
 class MainFragment : BindingFragment<FragmentMainBinding>() {
 

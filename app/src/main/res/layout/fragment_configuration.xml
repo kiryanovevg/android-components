@@ -23,9 +23,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/log"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvObject"
         app:layout_constraintBottom_toTopOf="@id/btnOpenActivity"
         />
 
@@ -48,7 +49,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnOpenActivity"
+        app:layout_constraintBottom_toTopOf="@id/cbBackStack"
+        />
+
+    <CheckBox
+        android:id="@+id/cbBackStack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_to_back_stack"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnReplaceFragment"
+        app:layout_constraintBottom_toTopOf="@id/cbRetain"
+        />
+
+    <CheckBox
+        android:id="@+id/cbRetain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/is_retain"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cbBackStack"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvBackStack"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:minHeight="200dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cbRetain"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

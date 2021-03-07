@@ -1,13 +1,13 @@
-package com.example.myapplication.ui.configuration
+package com.kiryanov.androidcomponents.ui.configuration
 
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
-import com.example.myapplication.R
-import com.example.myapplication.databinding.ActivityConfigurationBinding
-import com.example.myapplication.ui.common.BindingActivity
+import com.kiryanov.androidcomponents.R
+import com.kiryanov.androidcomponents.databinding.ActivityConfigurationBinding
+import com.kiryanov.androidcomponents.ui.common.BindingActivity
 import java.util.concurrent.ThreadLocalRandom
 
 class ConfigurationActivity : BindingActivity<ActivityConfigurationBinding>(), LifecycleLogging {
@@ -32,7 +32,7 @@ class ConfigurationActivity : BindingActivity<ActivityConfigurationBinding>(), L
         supportFragmentManager.findFragmentById(R.id.container_configuration) ?: run {
             supportFragmentManager.beginTransaction().replace(
                 R.id.container_configuration,
-                ConfigurationFragment.newInstance(),
+                ConfigurationFragment.newInstance(false),
                 ConfigurationFragment.TAG
             ).commitNow()
         }

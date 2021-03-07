@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.common
+package com.kiryanov.androidcomponents.ui.common
 
 import android.os.Bundle
 import android.view.LayoutInflater

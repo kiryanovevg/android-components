@@ -1,11 +1,11 @@
-package com.example.myapplication.ui.service
+package com.kiryanov.androidcomponents.ui.service
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.myapplication.R
+import com.kiryanov.androidcomponents.R
 
 class ServiceFragment : Fragment() {
 

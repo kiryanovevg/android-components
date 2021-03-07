@@ -1,11 +1,11 @@
-package com.example.myapplication.ui.main
+package com.kiryanov.androidcomponents.ui.main
 
 import android.graphics.Color
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.R
+import com.kiryanov.androidcomponents.R
 
 class ComponentAdapter : RecyclerView.Adapter<ComponentAdapter.ViewHolder>() {
 

@@ -3,4 +3,6 @@
     <string name="log">Log</string>
     <string name="new_activity">New Activity</string>
     <string name="replace_fragment">Replace Fragment</string>
+    <string name="is_retain">Is Retain</string>
+    <string name="add_to_back_stack">Add to back stack</string>
 </resources>

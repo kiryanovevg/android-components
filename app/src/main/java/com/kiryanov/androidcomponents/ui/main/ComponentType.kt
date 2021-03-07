@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.main
+package com.kiryanov.androidcomponents.ui.main
 
 enum class ComponentType(val label: String) {
     CONFIGURATION("Configuration"),

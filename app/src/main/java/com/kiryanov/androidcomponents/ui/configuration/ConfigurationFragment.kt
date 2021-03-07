@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.configuration
+package com.kiryanov.androidcomponents.ui.configuration
 
 import android.content.Context
 import android.content.Intent
@@ -6,9 +6,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.myapplication.R
-import com.example.myapplication.databinding.FragmentConfigurationBinding
-import com.example.myapplication.ui.common.BindingFragment
+import androidx.core.os.bundleOf
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.kiryanov.androidcomponents.R
+import com.kiryanov.androidcomponents.databinding.FragmentConfigurationBinding
+import com.kiryanov.androidcomponents.ui.common.BindingFragment
 import java.util.concurrent.ThreadLocalRandom
 
 class ConfigurationFragment : BindingFragment<FragmentConfigurationBinding>(),
@@ -17,6 +19,12 @@ class ConfigurationFragment : BindingFragment<FragmentConfigurationBinding>(),
     override val rId: Int = ThreadLocalRandom
         .current()
         .nextInt(0, 100)
+
+    private val isRetained: Boolean
+        get() = arguments?.getBoolean(KEY_RETAIN, false)
+            ?: throw IllegalArgumentException("Use newInstance() fun!")
+
+    private val adapter = BackStackAdapter()
 
     override fun inflateBindingView(
         inflater: LayoutInflater,
@@ -34,7 +42,7 @@ class ConfigurationFragment : BindingFragment<FragmentConfigurationBinding>(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        retainInstance = true
+        retainInstance = isRetained
         log("onCreate")
     }
 
@@ -52,7 +60,7 @@ class ConfigurationFragment : BindingFragment<FragmentConfigurationBinding>(),
 
         log("onViewCreated")
 
-        val text = "Activity: $activity\nFragment: $this"
+        val text = "Activity: $activity\n\nFragment: $this;\nisRetained: $isRetained"
         binding.tvObject.text = text
 
         binding.btnLog.setOnClickListener {
@@ -64,11 +72,37 @@ class ConfigurationFragment : BindingFragment<FragmentConfigurationBinding>(),
         }
 
         binding.btnReplaceFragment.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.container_configuration, newInstance(), TAG)
-                .addToBackStack(null)
-                .commit()
+            val isRetained = binding.cbRetain.isChecked
+            val addToBackStack = binding.cbBackStack.isChecked
+
+            replaceFragment(isRetained, addToBackStack)
         }
+
+        binding.rvBackStack.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvBackStack.adapter = adapter
+
+        val list = arrayListOf<BackStackAdapter.Item>().apply {
+            repeat(parentFragmentManager.backStackEntryCount) {
+                val entry = parentFragmentManager.getBackStackEntryAt(it)
+                add(
+                    BackStackAdapter.Item(
+                        entry.id,
+                        entry.name ?: "---"
+                    )
+                )
+            }
+        }
+
+        adapter.submitList(list)
+    }
+
+    private fun replaceFragment(isRetained: Boolean, addToBackStack: Boolean) {
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.container_configuration, newInstance(isRetained), TAG)
+            .apply {
+                if (addToBackStack) addToBackStack(null)
+            }
+            .commit()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -128,6 +162,13 @@ class ConfigurationFragment : BindingFragment<FragmentConfigurationBinding>(),
     companion object {
         val TAG = ConfigurationFragment::class.java.simpleName
 
-        fun newInstance() = ConfigurationFragment()
+        private const val KEY_RETAIN = "keyRetain"
+
+        fun newInstance(isRetained: Boolean) =
+            ConfigurationFragment().apply {
+                arguments = bundleOf(
+                    KEY_RETAIN to isRetained
+                )
+            }
     }
 }

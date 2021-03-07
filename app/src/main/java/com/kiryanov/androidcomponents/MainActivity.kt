@@ -1,10 +1,10 @@
-package com.example.myapplication
+package com.kiryanov.androidcomponents
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import com.example.myapplication.databinding.MainActivityBinding
-import com.example.myapplication.ui.common.BindingActivity
-import com.example.myapplication.ui.main.MainFragment
+import com.kiryanov.androidcomponents.databinding.MainActivityBinding
+import com.kiryanov.androidcomponents.ui.common.BindingActivity
+import com.kiryanov.androidcomponents.ui.main.MainFragment
 
 class MainActivity : BindingActivity<MainActivityBinding>() {
 
